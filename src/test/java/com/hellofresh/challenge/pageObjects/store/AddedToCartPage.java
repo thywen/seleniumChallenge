@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+
 public class AddedToCartPage extends PageWithHeader {
     private static String URL = "controller=product";
 
@@ -18,6 +20,7 @@ public class AddedToCartPage extends PageWithHeader {
     }
 
     public BasketPageObject goToBasket() {
+        wait.until(visibilityOf(proceedToCheckoutButton)).click();
         return (BasketPageObject) andReturn(BasketPageObject.class, driver);
     }
 
