@@ -1,11 +1,11 @@
 package com.hellofresh.challenge.pageObjects.store;
 
-import com.hellofresh.challenge.pageObjects.PageWithHeader;
+import com.hellofresh.challenge.pageObjects.PageWithTopMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ProductDetailPage extends PageWithHeader{
+public class ProductDetailPage extends PageWithTopMenu {
     private static String URL = "controller=product";
 
     @FindBy(css = "p#add_to_cart button")

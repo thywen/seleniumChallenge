@@ -1,10 +1,10 @@
 package com.hellofresh.challenge.pageObjects.store;
 
-import com.hellofresh.challenge.pageObjects.PageWithHeader;
+import com.hellofresh.challenge.pageObjects.PageWithTopMenu;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ProductsOverviewPage extends PageWithHeader {
+public class ProductsOverviewPage extends PageWithTopMenu {
     private static String URL = "controller=category";
 
     public ProductsOverviewPage(WebDriver driver) {

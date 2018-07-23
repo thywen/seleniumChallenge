@@ -1,11 +1,11 @@
 package com.hellofresh.challenge.pageObjects.user;
 
-import com.hellofresh.challenge.pageObjects.PageWithHeader;
+import com.hellofresh.challenge.pageObjects.PageWithTopMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class UserProfilePage extends PageWithHeader {
+public class UserProfilePage extends PageWithTopMenu {
     private static String URL = "controller=my-account";
 
     @FindBy(css = "h1")
