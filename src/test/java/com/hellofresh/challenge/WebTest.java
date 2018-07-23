@@ -1,7 +1,11 @@
 package com.hellofresh.challenge;
 
+import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
+import com.hellofresh.challenge.pageObjects.store.AddedToCartPage;
+import com.hellofresh.challenge.pageObjects.store.ProductDetailPage;
+import com.hellofresh.challenge.pageObjects.store.ProductsOverviewPage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.LoginFlow;
@@ -21,6 +25,7 @@ import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.in;
 import static org.junit.Assert.assertEquals;
 
 public class WebTest {
@@ -102,12 +107,14 @@ public class WebTest {
     @Test
     public void checkoutTest() {
         User user = repository.getExistingUser();
+        String itemToBuy = "Faded Short Sleeve T-shirts";
 
         UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Women"))).click();
-        driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
-        driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
+        ProductsOverviewPage overviewPage = profilePage.selectCategory(Category.WOMAN);
+
+        overviewPage.selectItem(itemToBuy);
+        ProductDetailPage addedToCartPage = overviewPage.openItem(itemToBuy);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("Submit"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='layer_cart']//a[@class and @title='Proceed to checkout']"))).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class,'cart_navigation')]/a[@title='Proceed to checkout']"))).click();
