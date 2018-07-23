@@ -1,6 +1,7 @@
 package com.hellofresh.challenge;
 
 import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.pageObjects.LoginPage;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class WebTest {
 
     @Test
     public void signInTest() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
+        storeHomePage.openLoginPage();
         String timestamp = String.valueOf(new Date().getTime());
         String email = "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";
         String name = "Firstname";
@@ -78,10 +79,8 @@ public class WebTest {
     @Test
     public void logInTest() {
         User user = repository.getExistingUser();
-        storeHomePage.openLoginPage();
-        driver.findElement(By.id("email")).sendKeys(user.getEmail());
-        driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
-        driver.findElement(By.id("SubmitLogin")).click();
+        LoginPage loginPage = storeHomePage.openLoginPage();
+        loginPage.logInUser(user);
         WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
 
         assertEquals("MY ACCOUNT", heading.getText());
@@ -94,7 +93,7 @@ public class WebTest {
     @Test
     public void checkoutTest() {
         User user = repository.getExistingUser();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
+        storeHomePage.openLoginPage();
         driver.findElement(By.id("email")).sendKeys(user.getEmail());
         driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
         driver.findElement(By.id("SubmitLogin")).click();
