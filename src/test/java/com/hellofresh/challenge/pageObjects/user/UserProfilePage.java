@@ -17,9 +17,6 @@ public class UserProfilePage extends PageWithHeader {
     @FindBy(className = "info-account")
     private WebElement welcomeText;
 
-    @FindBy(className = "logout")
-    private WebElement logoutButton;
-
     public UserProfilePage(WebDriver driver) {
         super(driver, URL);
     }

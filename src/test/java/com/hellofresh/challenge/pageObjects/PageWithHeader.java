@@ -13,6 +13,9 @@ public abstract class PageWithHeader extends BasePage {
     @FindBy(css = "a.login")
     private WebElement loginLink;
 
+    @FindBy(className = "logout")
+    protected WebElement logoutButton;
+
     protected PageWithHeader(WebDriver driver, String url) {
         super(driver, url);
     }
