@@ -1,11 +1,12 @@
-package com.hellofresh.challenge.pageObjects;
+package com.hellofresh.challenge.pageObjects.user;
 
 import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.pageObjects.PageWithHeader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends PageWithHeader {
     private static String URL = "controller=authentication";
 
     @FindBy(id = "email")

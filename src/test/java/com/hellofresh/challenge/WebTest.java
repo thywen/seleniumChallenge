@@ -1,10 +1,10 @@
 package com.hellofresh.challenge;
 
 import com.hellofresh.challenge.models.User;
-import com.hellofresh.challenge.pageObjects.LoginPage;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
-import com.hellofresh.challenge.pageObjects.UserProfilePage;
+import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
+import com.hellofresh.challenge.userflows.LoginFlow;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,11 +87,10 @@ public class WebTest {
     @Test
     public void logInTest() {
         User user = repository.getExistingUser();
-        LoginPage loginPage = storeHomePage.openLoginPage();
         String expectedHeading = "MY ACCOUNT";
         String expectedWelcomeMessage = "Welcome to your account.";
 
-        UserProfilePage profilePage = loginPage.logInUser(user);
+        UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);
 
         assertThat(profilePage.getHeading()).isEqualTo(expectedHeading);
         assertThat(profilePage.getAccountName()).isEqualTo(user.getName());
@@ -103,10 +102,9 @@ public class WebTest {
     @Test
     public void checkoutTest() {
         User user = repository.getExistingUser();
-        storeHomePage.openLoginPage();
-        driver.findElement(By.id("email")).sendKeys(user.getEmail());
-        driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
-        driver.findElement(By.id("SubmitLogin")).click();
+
+        UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Women"))).click();
         driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
         driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
