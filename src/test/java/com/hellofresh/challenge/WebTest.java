@@ -4,6 +4,7 @@ import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.LoginPage;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.repositories.UserRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -34,6 +35,11 @@ public class WebTest {
         wait = new WebDriverWait(driver, 10, 50);
         driver.get("http://automationpractice.com/index.php");
         storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        driver.close();
     }
 
     @Test
