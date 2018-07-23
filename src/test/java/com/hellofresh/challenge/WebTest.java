@@ -1,6 +1,7 @@
 package com.hellofresh.challenge;
 
 import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +24,7 @@ public class WebTest {
     WebDriverWait wait;
 
     private UserRepository repository = new UserRepository();
+    private StoreHomePage storeHomePage;
 
     @Before
     public void setUp() {
@@ -29,6 +32,7 @@ public class WebTest {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10, 50);
         driver.get("http://automationpractice.com/index.php");
+        storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
     }
 
     @Test
@@ -74,7 +78,7 @@ public class WebTest {
     @Test
     public void logInTest() {
         User user = repository.getExistingUser();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
+        storeHomePage.openLoginPage();
         driver.findElement(By.id("email")).sendKeys(user.getEmail());
         driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
         driver.findElement(By.id("SubmitLogin")).click();
