@@ -15,5 +15,8 @@ public class ProductDetailPage extends PageWithTopMenu {
         super(driver, URL);
     }
 
-
+    public AddedToCartPage addItemToCart() {
+        addToCartButton.click();
+        return (AddedToCartPage) andReturn(AddedToCartPage.class, driver);
+    }
 }

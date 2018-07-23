@@ -3,6 +3,9 @@ package com.hellofresh.challenge;
 import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
+import com.hellofresh.challenge.pageObjects.order.BasketPageObject;
+import com.hellofresh.challenge.pageObjects.order.OrderConfirmationPage;
+import com.hellofresh.challenge.pageObjects.order.ShippingPageObject;
 import com.hellofresh.challenge.pageObjects.store.AddedToCartPage;
 import com.hellofresh.challenge.pageObjects.store.ProductDetailPage;
 import com.hellofresh.challenge.pageObjects.store.ProductsOverviewPage;
@@ -25,7 +28,6 @@ import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 import static org.junit.Assert.assertEquals;
 
 public class WebTest {
@@ -115,14 +117,16 @@ public class WebTest {
 
         overviewPage.selectItem(itemToBuy);
         ProductDetailPage addedToCartPage = overviewPage.openItem(itemToBuy);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("Submit"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='layer_cart']//a[@class and @title='Proceed to checkout']"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@class,'cart_navigation')]/a[@title='Proceed to checkout']"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("processAddress"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("uniform-cgv"))).click();
-        driver.findElement(By.name("processCarrier")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("bankwire"))).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='cart_navigation']/button"))).click();
+        ShippingPageObject shippingPageObject = addedToCartPage
+                .addItemToCart()
+                .goToBasket()
+                .continueToAddressPage()
+                .goToShippingPage();
+        shippingPageObject.toggleTermsAndConditionsBox();
+        OrderConfirmationPage orderConfirmationPage = shippingPageObject
+                .processToPayment()
+                .payByBankwire()
+                .confirmOrder();
         WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
 
         assertEquals("ORDER CONFIRMATION", heading.getText());
