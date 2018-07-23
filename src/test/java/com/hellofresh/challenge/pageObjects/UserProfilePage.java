@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class UserProfilePage extends BasePage {
+    private static String URL = "controller=my-account";
+
     @FindBy(css = "h1")
     private WebElement heading;
 
@@ -18,7 +20,7 @@ public class UserProfilePage extends BasePage {
     private WebElement logoutButton;
 
     public UserProfilePage(WebDriver driver) {
-        super(driver);
+        super(driver, URL);
     }
 
     public String getHeading() {

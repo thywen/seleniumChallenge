@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
+    private static String URL = "controller=authentication";
 
     @FindBy(id = "email")
     private WebElement emailField;
@@ -17,7 +18,7 @@ public class LoginPage extends BasePage {
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
-        super(driver);
+        super(driver, URL);
     }
 
     public UserProfilePage logInUser(User user) {

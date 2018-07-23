@@ -91,14 +91,13 @@ public class WebTest {
         String expectedHeading = "MY ACCOUNT";
         String expectedWelcomeMessage = "Welcome to your account.";
 
-
         UserProfilePage profilePage = loginPage.logInUser(user);
 
         assertThat(profilePage.getHeading()).isEqualTo(expectedHeading);
         assertThat(profilePage.getAccountName()).isEqualTo(user.getName());
         assertThat(profilePage.getWelcomeText()).contains(expectedWelcomeMessage);
         assertThat(profilePage.logoutVisible()).isTrue();
-        assertTrue(driver.getCurrentUrl().contains("controller=my-account"));
+        assertThat(profilePage.isCorrectUrl()).isTrue();
     }
 
     @Test
