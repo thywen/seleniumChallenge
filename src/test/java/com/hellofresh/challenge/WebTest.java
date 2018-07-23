@@ -1,5 +1,7 @@
 package com.hellofresh.challenge;
 
+import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.repositories.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -19,8 +21,7 @@ public class WebTest {
     WebDriver driver;
     WebDriverWait wait;
 
-    String existingUserEmail = "hf_challenge_123456@hf12345.com";
-    String existingUserPassword = "12345678";
+    private UserRepository repository = new UserRepository();
 
     @Before
     public void setUp() {
@@ -72,15 +73,15 @@ public class WebTest {
 
     @Test
     public void logInTest() {
-        String fullName = "Joe Black";
+        User user = repository.getExistingUser();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
-        driver.findElement(By.id("email")).sendKeys(existingUserEmail);
-        driver.findElement(By.id("passwd")).sendKeys(existingUserPassword);
+        driver.findElement(By.id("email")).sendKeys(user.getEmail());
+        driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
         driver.findElement(By.id("SubmitLogin")).click();
         WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
 
         assertEquals("MY ACCOUNT", heading.getText());
-        assertEquals(fullName, driver.findElement(By.className("account")).getText());
+        assertEquals(user.getName(), driver.findElement(By.className("account")).getText());
         assertTrue(driver.findElement(By.className("info-account")).getText().contains("Welcome to your account."));
         assertTrue(driver.findElement(By.className("logout")).isDisplayed());
         assertTrue(driver.getCurrentUrl().contains("controller=my-account"));
@@ -88,9 +89,10 @@ public class WebTest {
 
     @Test
     public void checkoutTest() {
+        User user = repository.getExistingUser();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("login"))).click();
-        driver.findElement(By.id("email")).sendKeys(existingUserEmail);
-        driver.findElement(By.id("passwd")).sendKeys(existingUserPassword);
+        driver.findElement(By.id("email")).sendKeys(user.getEmail());
+        driver.findElement(By.id("passwd")).sendKeys(user.getPassword());
         driver.findElement(By.id("SubmitLogin")).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Women"))).click();
         driver.findElement(By.xpath("//a[@title='Faded Short Sleeve T-shirts']/ancestor::li")).click();
