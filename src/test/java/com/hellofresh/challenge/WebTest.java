@@ -3,6 +3,7 @@ package com.hellofresh.challenge;
 import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.LoginPage;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
+import com.hellofresh.challenge.pageObjects.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -19,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Date;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 public class WebTest {
@@ -86,13 +88,16 @@ public class WebTest {
     public void logInTest() {
         User user = repository.getExistingUser();
         LoginPage loginPage = storeHomePage.openLoginPage();
-        loginPage.logInUser(user);
-        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
+        String expectedHeading = "MY ACCOUNT";
+        String expectedWelcomeMessage = "Welcome to your account.";
 
-        assertEquals("MY ACCOUNT", heading.getText());
-        assertEquals(user.getName(), driver.findElement(By.className("account")).getText());
-        assertTrue(driver.findElement(By.className("info-account")).getText().contains("Welcome to your account."));
-        assertTrue(driver.findElement(By.className("logout")).isDisplayed());
+
+        UserProfilePage profilePage = loginPage.logInUser(user);
+
+        assertThat(profilePage.getHeading()).isEqualTo(expectedHeading);
+        assertThat(profilePage.getAccountName()).isEqualTo(user.getName());
+        assertThat(profilePage.getWelcomeText()).contains(expectedWelcomeMessage);
+        assertThat(profilePage.logoutVisible()).isTrue();
         assertTrue(driver.getCurrentUrl().contains("controller=my-account"));
     }
 

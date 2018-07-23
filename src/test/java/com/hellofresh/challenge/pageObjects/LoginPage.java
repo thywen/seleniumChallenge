@@ -20,9 +20,10 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void logInUser(User user) {
+    public UserProfilePage logInUser(User user) {
         emailField.sendKeys(user.getEmail());
         passwordField.sendKeys(user.getPassword());
         loginButton.click();
+        return (UserProfilePage) andReturn(UserProfilePage.class, driver);
     }
 }
