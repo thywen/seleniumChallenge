@@ -3,14 +3,13 @@ package com.hellofresh.challenge;
 import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
-import com.hellofresh.challenge.pageObjects.order.BasketPageObject;
 import com.hellofresh.challenge.pageObjects.order.OrderConfirmationPage;
 import com.hellofresh.challenge.pageObjects.order.ShippingPageObject;
-import com.hellofresh.challenge.pageObjects.store.AddedToCartPage;
 import com.hellofresh.challenge.pageObjects.store.ProductDetailPage;
 import com.hellofresh.challenge.pageObjects.store.ProductsOverviewPage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
+import com.hellofresh.challenge.userflows.BuyItemFlow;
 import com.hellofresh.challenge.userflows.LoginFlow;
 import org.junit.After;
 import org.junit.Before;
@@ -115,21 +114,7 @@ public class WebTest {
 
         UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);
 
-        ProductsOverviewPage overviewPage = profilePage.selectCategory(Category.WOMAN);
-
-        overviewPage.selectItem(itemToBuy);
-        ProductDetailPage addedToCartPage = overviewPage.openItem(itemToBuy);
-        ShippingPageObject shippingPageObject = addedToCartPage
-                .addItemToCart()
-                .goToBasket()
-                .continueToAddressPage()
-                .goToShippingPage();
-        shippingPageObject.toggleTermsAndConditionsBox();
-        OrderConfirmationPage orderConfirmationPage = shippingPageObject
-                .processToPayment()
-                .payByBankwire()
-                .confirmOrder();
-
+        OrderConfirmationPage orderConfirmationPage = BuyItemFlow.buyItemFrom(profilePage, Category.WOMAN, itemToBuy);
 
         assertThat(orderConfirmationPage.getHeading()).isEqualTo(expectedHeading);
         assertThat(orderConfirmationPage.isPaymentStepActive()).isTrue();

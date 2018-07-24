@@ -18,7 +18,7 @@ public class ShippingPageObject extends PageWithTopMenu{
     @FindBy(name = "processCarrier")
     private WebElement processToPaymentButton;
 
-    public void toggleTermsAndConditionsBox() {
+    public void acceptTermsAndConditions() {
         termsAndConditionBox.click();
     }
 

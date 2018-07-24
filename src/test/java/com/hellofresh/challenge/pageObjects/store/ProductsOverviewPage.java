@@ -12,6 +12,8 @@ public class ProductsOverviewPage extends PageWithTopMenu {
     }
 
     public void selectItem(String itemtitle) {
+        //Due to a problem with the webdriver and the product you need to click the item twice (the first one selects it
+        //The second one opens the new page
         driver.findElement(By.xpath(buildXpathForItem(itemtitle))).click();
     }
 
