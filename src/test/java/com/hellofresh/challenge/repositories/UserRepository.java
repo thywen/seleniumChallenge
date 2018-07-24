@@ -1,6 +1,7 @@
 package com.hellofresh.challenge.repositories;
 
 import com.github.javafaker.Faker;
+import com.hellofresh.challenge.models.user.Address;
 import com.hellofresh.challenge.models.user.Gender;
 import com.hellofresh.challenge.models.user.User;
 
@@ -8,7 +9,6 @@ import java.util.Date;
 import java.util.Random;
 
 public class UserRepository {
-    private Faker faker;
 
     public User getExistingUser() {
         String existingUserEmail = "hf_challenge_123456@hf12345.com";
@@ -20,13 +20,17 @@ public class UserRepository {
     }
 
     public User createRandomUser() {
-        faker = new Faker();
-        String name = faker.name().fullName();
+        Faker faker = new Faker();
+        AddressRepository addressRepository = new AddressRepository();
+        String name = faker.name().firstName() + " " + faker.name().lastName();
         String password = faker.internet().password();
         String email = getTimestampedEmail();
-        Date birthdate = faker.date().birthday();
+        Date birthday = faker.date().birthday();
+        Address address = addressRepository.getRandomAddress();
         return new User.UserBuilder(name, email, password)
                 .withGender(getRandomGender())
+                .withBirthday(birthday)
+                .withAddress(address)
                 .build();
     }
 
@@ -38,7 +42,7 @@ public class UserRepository {
     private Gender getRandomGender() {
         Gender[] genders = Gender.values();
         Random random = new Random();
-        return genders[random.nextInt(genders.length -1)];
+        return genders[random.nextInt(genders.length - 1)];
     }
 
 }
