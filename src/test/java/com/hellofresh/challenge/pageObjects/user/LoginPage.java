@@ -1,6 +1,6 @@
 package com.hellofresh.challenge.pageObjects.user;
 
-import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.models.user.User;
 import com.hellofresh.challenge.pageObjects.PageWithTopMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

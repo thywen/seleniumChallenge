@@ -1,10 +1,9 @@
 package com.hellofresh.challenge.repositories;
 
 import com.github.javafaker.Faker;
-import com.hellofresh.challenge.models.Gender;
-import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.models.user.Gender;
+import com.hellofresh.challenge.models.user.User;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -25,6 +24,7 @@ public class UserRepository {
         String name = faker.name().fullName();
         String password = faker.internet().password();
         String email = getTimestampedEmail();
+        Date birthdate = faker.date().birthday();
         return new User.UserBuilder(name, email, password)
                 .withGender(getRandomGender())
                 .build();

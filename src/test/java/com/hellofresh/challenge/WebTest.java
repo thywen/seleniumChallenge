@@ -1,7 +1,7 @@
 package com.hellofresh.challenge;
 
 import com.hellofresh.challenge.models.Category;
-import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.models.user.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.pageObjects.order.OrderConfirmationPage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;

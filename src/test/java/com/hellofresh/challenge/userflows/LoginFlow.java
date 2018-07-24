@@ -1,6 +1,6 @@
 package com.hellofresh.challenge.userflows;
 
-import com.hellofresh.challenge.models.User;
+import com.hellofresh.challenge.models.user.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 
