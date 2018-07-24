@@ -1,7 +1,7 @@
 package com.hellofresh.challenge.pageObjects.store;
 
 import com.hellofresh.challenge.pageObjects.PageWithHeader;
-import com.hellofresh.challenge.pageObjects.order.BasketPageObject;
+import com.hellofresh.challenge.pageObjects.order.BasketPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,9 +19,9 @@ public class AddedToCartPage extends PageWithHeader {
         super(driver, URL);
     }
 
-    public BasketPageObject goToBasket() {
+    public BasketPage goToBasket() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (BasketPageObject) andReturn(BasketPageObject.class);
+        return (BasketPage) andReturn(BasketPage.class);
     }
 
 }

@@ -4,9 +4,6 @@ import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
 import com.hellofresh.challenge.pageObjects.order.OrderConfirmationPage;
-import com.hellofresh.challenge.pageObjects.order.ShippingPageObject;
-import com.hellofresh.challenge.pageObjects.store.ProductDetailPage;
-import com.hellofresh.challenge.pageObjects.store.ProductsOverviewPage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.BuyItemFlow;
@@ -52,6 +49,7 @@ public class WebTest {
 
     @Test
     public void signInTest() {
+        User user = repository.createRandomUser();
         storeHomePage.openLoginPage();
         String timestamp = String.valueOf(new Date().getTime());
         String email = "hf_challenge_" + timestamp + "@hf" + timestamp.substring(7) + ".com";

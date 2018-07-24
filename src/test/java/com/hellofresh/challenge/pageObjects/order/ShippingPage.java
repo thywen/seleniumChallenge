@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ShippingPageObject extends PageWithTopMenu{
+public class ShippingPage extends PageWithTopMenu{
     private static String URL = "controller=order";
 
-    public ShippingPageObject(WebDriver driver) {
+    public ShippingPage(WebDriver driver) {
         super(driver, URL);
     }
 

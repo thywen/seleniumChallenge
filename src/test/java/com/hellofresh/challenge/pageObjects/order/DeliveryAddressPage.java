@@ -7,19 +7,19 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
-public class BasketPageObject extends PageWithTopMenu {
-    public static String URL = "controller=order";
+public class DeliveryAddressPage extends PageWithTopMenu {
+    public static String URL = "controller=order&step=1";
 
-    @FindBy(xpath = "//*[contains(@class,'cart_navigation')]/a[@title='Proceed to checkout']")
+    @FindBy(name = "processAddress")
     private WebElement proceedToCheckoutButton;
 
-
-    public BasketPageObject(WebDriver driver) {
+    public DeliveryAddressPage(WebDriver driver) {
         super(driver, URL);
     }
 
-    public DeliveryAddressPageObject continueToAddressPage() {
+    public ShippingPage goToShippingPage() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (DeliveryAddressPageObject) andReturn(DeliveryAddressPageObject.class);
+        return (ShippingPage) andReturn(ShippingPage.class);
     }
+
 }

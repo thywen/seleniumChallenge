@@ -18,6 +18,12 @@ public class LoginPage extends PageWithTopMenu {
     @FindBy(id = "SubmitLogin")
     private WebElement loginButton;
 
+    @FindBy(id = "email_create")
+    private WebElement createNewAccountEmail;
+
+    @FindBy(id = "submitCreate")
+    private WebElement createNewAccountButton;
+
     public LoginPage(WebDriver driver) {
         super(driver, URL);
     }
@@ -27,5 +33,10 @@ public class LoginPage extends PageWithTopMenu {
         passwordField.sendKeys(user.getPassword());
         loginButton.click();
         return (UserProfilePage) andReturn(UserProfilePage.class);
+    }
+
+    public void createUserWith(String email) {
+        createNewAccountEmail.sendKeys(email);
+
     }
 }
