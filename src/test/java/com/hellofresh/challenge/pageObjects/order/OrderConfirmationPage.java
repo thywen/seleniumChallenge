@@ -1,12 +1,13 @@
 package com.hellofresh.challenge.pageObjects.order;
 
-import com.hellofresh.challenge.pageObjects.PageWithTopMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+
 public class OrderConfirmationPage extends OrderPage {
-    private static String URL = "controller=payment";
+    private static String URL = "controller=order-confirmation";
 
     @FindBy(css = "h1")
     private WebElement heading;
@@ -28,5 +29,9 @@ public class OrderConfirmationPage extends OrderPage {
 
     public String getConfirmationText() {
         return orderConfirmationText.getText();
+    }
+
+    public boolean isPaymentStepActive() {
+        return paymentTabActive.isDisplayed();
     }
 }

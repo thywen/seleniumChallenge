@@ -13,4 +13,8 @@ abstract class OrderPage extends PageWithTopMenu{
     OrderPage(WebDriver driver, String url) {
         super(driver, url);
     }
+
+    public boolean shippingTabVisible() {
+        return shippingTab.isDisplayed();
+    }
 }

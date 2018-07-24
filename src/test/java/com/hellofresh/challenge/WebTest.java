@@ -110,6 +110,8 @@ public class WebTest {
     public void checkoutTest() {
         User user = repository.getExistingUser();
         String itemToBuy = "Faded Short Sleeve T-shirts";
+        String expectedHeading = "ORDER CONFIRMATION";
+        String expectedConfirmation = "Your order on My Store is complete.";
 
         UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);
 
@@ -127,12 +129,12 @@ public class WebTest {
                 .processToPayment()
                 .payByBankwire()
                 .confirmOrder();
-        WebElement heading = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("h1")));
 
-        assertEquals("ORDER CONFIRMATION", heading.getText());
-        assertTrue(driver.findElement(By.xpath("//li[@class='step_done step_done_last four']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//li[@id='step_end' and @class='step_current last']")).isDisplayed());
-        assertTrue(driver.findElement(By.xpath("//*[@class='cheque-indent']/strong")).getText().contains("Your order on My Store is complete."));
-        assertTrue(driver.getCurrentUrl().contains("controller=order-confirmation"));
+
+        assertThat(orderConfirmationPage.getHeading()).isEqualTo(expectedHeading);
+        assertThat(orderConfirmationPage.isPaymentStepActive()).isTrue();
+        assertThat(orderConfirmationPage.shippingTabVisible()).isTrue();
+        assertThat(orderConfirmationPage.getConfirmationText()).contains(expectedConfirmation);
+        assertThat(orderConfirmationPage.isCorrectUrl()).isTrue();
     }
 }
