@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.hellofresh.challenge.models.user.Address;
 import com.hellofresh.challenge.models.user.Gender;
 import com.hellofresh.challenge.models.user.User;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 import java.util.Random;
@@ -13,21 +14,23 @@ public class UserRepository {
     public User getExistingUser() {
         String existingUserEmail = "hf_challenge_123456@hf12345.com";
         String existingUserPassword = "12345678";
-        String existingUserName = "Joe Black";
+        String existingUserFirstname = "Joe";
+        String existingUserLastname = "Black";
 
-        return new User.UserBuilder(existingUserName, existingUserEmail, existingUserPassword)
+        return new User.UserBuilder(existingUserFirstname, existingUserLastname, existingUserEmail, existingUserPassword)
                 .build();
     }
 
     public User createRandomUser() {
         Faker faker = new Faker();
         AddressRepository addressRepository = new AddressRepository();
-        String name = faker.name().firstName() + " " + faker.name().lastName();
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
         String password = faker.internet().password();
         String email = getTimestampedEmail();
-        Date birthday = faker.date().birthday();
+        DateTime birthday = new DateTime(faker.date().birthday());
         Address address = addressRepository.getRandomAddress();
-        return new User.UserBuilder(name, email, password)
+        return new User.UserBuilder(firstName, lastName, email, password)
                 .withGender(getRandomGender())
                 .withBirthday(birthday)
                 .withAddress(address)

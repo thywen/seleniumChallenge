@@ -3,7 +3,7 @@ package com.hellofresh.challenge.repositories;
 import com.github.javafaker.Faker;
 import com.hellofresh.challenge.models.user.Address;
 
-public class AddressRepository {
+class AddressRepository {
 
     Address getRandomAddress() {
         Faker faker = new Faker();
