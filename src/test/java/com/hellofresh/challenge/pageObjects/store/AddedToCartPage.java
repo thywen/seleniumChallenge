@@ -21,7 +21,7 @@ public class AddedToCartPage extends PageWithHeader {
 
     public BasketPageObject goToBasket() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (BasketPageObject) andReturn(BasketPageObject.class, driver);
+        return (BasketPageObject) andReturn(BasketPageObject.class);
     }
 
 }

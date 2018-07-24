@@ -19,7 +19,7 @@ public class ProductsOverviewPage extends PageWithTopMenu {
 
     public ProductDetailPage openItem(String itemtitle) {
         driver.findElement(By.xpath(buildXpathForItem(itemtitle))).click();
-        return (ProductDetailPage) andReturn(ProductDetailPage.class, driver);
+        return (ProductDetailPage) andReturn(ProductDetailPage.class);
     }
 
     private String buildXpathForItem(String itemtitle) {

@@ -21,7 +21,7 @@ abstract public class PageWithTopMenu extends PageWithHeader {
             case WOMAN:
                 womenLink.click();
             default:
-                return (ProductsOverviewPage) andReturn(ProductsOverviewPage.class, driver);
+                return (ProductsOverviewPage) andReturn(ProductsOverviewPage.class);
         }
     }
 }

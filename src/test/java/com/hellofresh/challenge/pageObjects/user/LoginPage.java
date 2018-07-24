@@ -26,6 +26,6 @@ public class LoginPage extends PageWithTopMenu {
         emailField.sendKeys(user.getEmail());
         passwordField.sendKeys(user.getPassword());
         loginButton.click();
-        return (UserProfilePage) andReturn(UserProfilePage.class, driver);
+        return (UserProfilePage) andReturn(UserProfilePage.class);
     }
 }

@@ -17,6 +17,6 @@ public class OrderSummaryPage extends PageWithTopMenu {
 
     public OrderConfirmationPage confirmOrder() {
         confirmOrderButton.click();
-        return (OrderConfirmationPage) andReturn(OrderConfirmationPage.class, driver);
+        return (OrderConfirmationPage) andReturn(OrderConfirmationPage.class);
     }
 }

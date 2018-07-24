@@ -19,7 +19,7 @@ public class DeliveryAddressPageObject extends PageWithTopMenu {
 
     public ShippingPageObject goToShippingPage() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (ShippingPageObject) andReturn(ShippingPageObject.class, driver);
+        return (ShippingPageObject) andReturn(ShippingPageObject.class);
     }
 
 }

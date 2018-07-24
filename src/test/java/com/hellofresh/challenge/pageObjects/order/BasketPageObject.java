@@ -20,6 +20,6 @@ public class BasketPageObject extends PageWithTopMenu {
 
     public DeliveryAddressPageObject continueToAddressPage() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (DeliveryAddressPageObject) andReturn(DeliveryAddressPageObject.class, driver);
+        return (DeliveryAddressPageObject) andReturn(DeliveryAddressPageObject.class);
     }
 }

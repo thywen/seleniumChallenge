@@ -17,6 +17,6 @@ public class PaymentSelectionPage extends PageWithTopMenu {
 
     public OrderSummaryPage payByBankwire() {
         bankwireButton.click();
-        return (OrderSummaryPage) andReturn(OrderSummaryPage.class, driver);
+        return (OrderSummaryPage) andReturn(OrderSummaryPage.class);
     }
 }

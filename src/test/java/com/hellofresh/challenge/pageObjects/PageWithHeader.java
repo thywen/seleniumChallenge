@@ -19,7 +19,7 @@ public abstract class PageWithHeader extends BasePage {
 
     public LoginPage openLoginPage() {
         loginLink.click();
-        return (LoginPage) andReturn(LoginPage.class, driver);
+        return (LoginPage) andReturn(LoginPage.class);
     }
 
 
