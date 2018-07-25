@@ -11,14 +11,14 @@ class AddressRepository {
                 faker.address().streetAddress(),
                 faker.address().city(),
                 faker.address().state(),
-                faker.address().zipCode(),
+                faker.address().zipCode().substring(0,5),
                 "United States",
                 faker.phoneNumber().cellPhone(),
                 faker.internet().domainSuffix())
                 .withaddress2(faker.address().secondaryAddress())
                 .withCompany(faker.company().name())
                 .withOther(faker.lorem().sentence(3))
-                .withPhone(faker.phoneNumber().phoneNumber())
+                .withPhone(faker.phoneNumber().cellPhone())
                 .build();
     }
 

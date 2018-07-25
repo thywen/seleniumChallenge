@@ -4,10 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DriverFactory {
-    private DriverFactory() {}
+    private DriverFactory() {
+
+    }
+
     private static DriverFactory instance = new DriverFactory();
 
-    public static DriverFactory getInstance() {
+    static DriverFactory getInstance() {
         return instance;
     }
 
@@ -21,12 +24,11 @@ public class DriverFactory {
     };
 
 
-
     WebDriver getChromeDriver() {
         return chromeDriver.get();
     }
 
-    public void removeChromeDriver() {
+    void removeChromeDriver() {
         chromeDriver.get().close();
         chromeDriver.remove();
     }
