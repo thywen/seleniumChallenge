@@ -1,5 +1,6 @@
 package com.hellofresh.challenge;
 
+import com.hellofresh.challenge.listener.ScreenshotListener;
 import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.user.User;
 import com.hellofresh.challenge.pageObjects.StoreHomePage;
@@ -17,6 +18,7 @@ import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Listeners({ScreenshotListener.class})
 public class WebTest {
     private DriverFactory driverFactory = DriverFactory.getInstance();
     private UserRepository repository = new UserRepository();
@@ -59,7 +61,7 @@ public class WebTest {
     @Test
     public void logInTest() {
         User user = repository.getExistingUser();
-        String expectedHeading = "MY ACCOUNT";
+        String expectedHeading = "MaY ACCOUNT";
         String expectedWelcomeMessage = "Welcome to your account.";
 
         UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);

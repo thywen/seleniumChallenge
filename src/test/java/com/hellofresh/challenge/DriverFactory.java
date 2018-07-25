@@ -10,7 +10,7 @@ public class DriverFactory {
 
     private static DriverFactory instance = new DriverFactory();
 
-    static DriverFactory getInstance() {
+    public static DriverFactory getInstance() {
         return instance;
     }
 
@@ -24,7 +24,7 @@ public class DriverFactory {
     };
 
 
-    WebDriver getChromeDriver() {
+    public WebDriver getChromeDriver() {
         return chromeDriver.get();
     }
 
