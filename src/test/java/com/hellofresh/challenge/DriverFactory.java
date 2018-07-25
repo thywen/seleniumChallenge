@@ -2,6 +2,7 @@ package com.hellofresh.challenge;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
     private DriverFactory() {
@@ -23,13 +24,36 @@ public class DriverFactory {
         }
     };
 
+    private ThreadLocal<WebDriver> firefoxDriver = new ThreadLocal<WebDriver>() {
+        @Override
+        protected WebDriver initialValue() {
+            System.setProperty("webdriver.gecko.driver",
+                    "src/test/resources/geckodriver");
+            return new FirefoxDriver();
+        }
+    };
 
-    public WebDriver getChromeDriver() {
-        return chromeDriver.get();
+
+
+    public WebDriver getDriver(Driver driver) {
+        if (driver == Driver.CHROMEDRIVER) {
+            return chromeDriver.get();
+        } else if (driver == Driver.FIREFOXDRIVER) {
+            return firefoxDriver.get();
+        } else {
+            throw new IllegalArgumentException("Unknown Driver");
+        }
     }
 
-    void removeChromeDriver() {
-        chromeDriver.get().close();
-        chromeDriver.remove();
+    void removeDriver(Driver driver) {
+        if (driver == Driver.CHROMEDRIVER) {
+            chromeDriver.get().close();
+            chromeDriver.remove();
+        } else if (driver == Driver.FIREFOXDRIVER) {
+            firefoxDriver.get().close();
+            firefoxDriver.remove();
+        } else {
+            throw new IllegalArgumentException("Unknown Driver");
+        }
     }
 }

@@ -11,9 +11,7 @@ import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.BuyItemFlow;
 import com.hellofresh.challenge.userflows.LoginFlow;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,17 +21,18 @@ public class WebTest {
     private DriverFactory driverFactory = DriverFactory.getInstance();
     private UserRepository repository = new UserRepository();
     private StoreHomePage storeHomePage;
+    private String driverName = System.getenv("DRIVER");
 
     @BeforeMethod
     public void setUp() {
-        WebDriver driver = driverFactory.getChromeDriver();
+        WebDriver driver = driverFactory.getDriver(Driver.valueOf(driverName));
         driver.get("http://automationpractice.com/index.php");
         storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
-        driverFactory.removeChromeDriver();
+        driverFactory.removeDriver(Driver.valueOf(driverName));
     }
 
     @Test
@@ -75,6 +74,7 @@ public class WebTest {
 
     @Test
     public void checkoutTest() {
+        System.out.print(System.getenv("DRIVER"));
         User user = repository.getExistingUser();
         String itemToBuy = "Faded Short Sleeve T-shirts";
         String expectedHeading = "ORDER CONFIRMATION";
