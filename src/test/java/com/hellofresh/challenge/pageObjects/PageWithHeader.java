@@ -18,7 +18,7 @@ public abstract class PageWithHeader extends BasePage {
     }
 
     public LoginPage openLoginPage() {
-        loginLink.click();
+        saveClick(loginLink);
         return andReturn(LoginPage.class);
     }
 

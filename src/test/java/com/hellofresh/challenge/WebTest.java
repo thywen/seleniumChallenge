@@ -9,38 +9,29 @@ import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.BuyItemFlow;
 import com.hellofresh.challenge.userflows.LoginFlow;
-
-import org.junit.After;
-import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class WebTest {
-    WebDriver driver;
-    WebDriverWait wait;
-
+    private DriverFactory driverFactory = DriverFactory.getInstance();
     private UserRepository repository = new UserRepository();
     private StoreHomePage storeHomePage;
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10, 50);
+        WebDriver driver = driverFactory.getChromeDriver();
         driver.get("http://automationpractice.com/index.php");
         storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
     }
 
-    @AfterSuite
+    @AfterMethod
     public void tearDown() throws Exception {
-        driver.close();
+        driverFactory.removeChromeDriver();
     }
 
     @Test
