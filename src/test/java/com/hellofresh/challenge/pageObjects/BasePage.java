@@ -15,8 +15,8 @@ abstract class BasePage {
         this.wait =  new WebDriverWait(driver, 10, 50);
     }
 
-    protected BasePage andReturn(Class<?> pageObject) {
-        return (BasePage) PageFactory.initElements(driver, pageObject);
+    protected <T extends BasePage> T andReturn(Class<T> pageObject) {
+        return PageFactory.initElements(driver, pageObject);
     }
 
     public boolean isCorrectUrl() {

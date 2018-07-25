@@ -20,6 +20,6 @@ public class BasketPage extends PageWithTopMenu {
 
     public DeliveryAddressPage continueToAddressPage() {
         wait.until(visibilityOf(proceedToCheckoutButton)).click();
-        return (DeliveryAddressPage) andReturn(DeliveryAddressPage.class);
+        return andReturn(DeliveryAddressPage.class);
     }
 }

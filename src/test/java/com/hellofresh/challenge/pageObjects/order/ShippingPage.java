@@ -24,6 +24,6 @@ public class ShippingPage extends PageWithTopMenu{
 
     public PaymentSelectionPage processToPayment() {
         processToPaymentButton.click();
-        return (PaymentSelectionPage) andReturn(PaymentSelectionPage.class);
+        return andReturn(PaymentSelectionPage.class);
     }
 }

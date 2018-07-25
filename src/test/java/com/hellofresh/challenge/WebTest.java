@@ -9,23 +9,18 @@ import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.BuyItemFlow;
 import com.hellofresh.challenge.userflows.LoginFlow;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
-import java.util.Date;
-
-import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 public class WebTest {
     WebDriver driver;
@@ -34,7 +29,7 @@ public class WebTest {
     private UserRepository repository = new UserRepository();
     private StoreHomePage storeHomePage;
 
-    @Before
+    @BeforeSuite
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         driver = new ChromeDriver();
@@ -43,7 +38,7 @@ public class WebTest {
         storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
     }
 
-    @After
+    @AfterSuite
     public void tearDown() throws Exception {
         driver.close();
     }

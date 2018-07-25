@@ -32,12 +32,12 @@ public class LoginPage extends PageWithTopMenu {
         emailField.sendKeys(user.getEmail());
         passwordField.sendKeys(user.getPassword());
         loginButton.click();
-        return (UserProfilePage) andReturn(UserProfilePage.class);
+        return andReturn(UserProfilePage.class);
     }
 
     public RegistrationPage createUserWith(String email) {
         createNewAccountEmail.sendKeys(email);
         createNewAccountButton.click();
-        return (RegistrationPage) andReturn(RegistrationPage.class);
+        return andReturn(RegistrationPage.class);
     }
 }

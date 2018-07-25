@@ -124,6 +124,6 @@ public class RegistrationPage extends PageWithTopMenu{
 
     public UserProfilePage confirmRegistration() {
         createAccountButton.click();
-        return (UserProfilePage) andReturn(UserProfilePage.class);
+        return andReturn(UserProfilePage.class);
     }
 }
