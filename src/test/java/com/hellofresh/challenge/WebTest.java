@@ -1,5 +1,7 @@
 package com.hellofresh.challenge;
 
+import com.hellofresh.challenge.driver.Driver;
+import com.hellofresh.challenge.driver.DriverService;
 import com.hellofresh.challenge.listener.ScreenshotListener;
 import com.hellofresh.challenge.models.Category;
 import com.hellofresh.challenge.models.user.User;
@@ -19,25 +21,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Listeners({ScreenshotListener.class})
 public class WebTest {
-    private DriverFactory driverFactory = DriverFactory.getInstance();
+    private DriverService driverService = DriverService.getInstance();
     private UserRepository repository = new UserRepository();
     private StoreHomePage storeHomePage;
     private String driverName = System.getenv("DRIVER");
 
     @BeforeMethod
     public void setUp() {
-        WebDriver driver = driverFactory.getDriver(Driver.valueOf(driverName));
+        WebDriver driver = driverService.getDriver(Driver.valueOf(driverName));
         driver.get("http://automationpractice.com/index.php");
         storeHomePage = PageFactory.initElements(driver, StoreHomePage.class);
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
-        driverFactory.removeDriver(Driver.valueOf(driverName));
+        driverService.removeDriver(Driver.valueOf(driverName));
     }
 
     @Test
-    public void signInTest() {
+    public void createUserTest() {
         User user = repository.createRandomUser();
         LoginPage loginPage = storeHomePage.openLoginPage();
         String expectedHeading = "MY ACCOUNT";
@@ -55,7 +57,7 @@ public class WebTest {
     @Test
     public void logInTest() {
         User user = repository.getExistingUser();
-        String expectedHeading = "MaY ACCOUNT";
+        String expectedHeading = "MY ACCOUNT";
         String expectedWelcomeMessage = "Welcome to your account.";
 
         UserProfilePage profilePage = LoginFlow.loginUserFrom(storeHomePage, user);

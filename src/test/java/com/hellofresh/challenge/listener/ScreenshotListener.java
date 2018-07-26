@@ -1,7 +1,7 @@
 package com.hellofresh.challenge.listener;
 
-import com.hellofresh.challenge.Driver;
-import com.hellofresh.challenge.DriverFactory;
+import com.hellofresh.challenge.driver.Driver;
+import com.hellofresh.challenge.driver.DriverService;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ScreenshotListener extends TestListenerAdapter {
-    private DriverFactory driverFactory = DriverFactory.getInstance();
+    private DriverService driverFactory = DriverService.getInstance();
     private String driverName = System.getenv("DRIVER");
 
     @Override

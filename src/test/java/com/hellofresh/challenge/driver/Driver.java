@@ -1,4 +1,4 @@
-package com.hellofresh.challenge;
+package com.hellofresh.challenge.driver;
 
 public enum Driver {
     CHROMEDRIVER, FIREFOXDRIVER
