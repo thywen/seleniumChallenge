@@ -9,6 +9,7 @@ import com.hellofresh.challenge.pageObjects.user.LoginPage;
 import com.hellofresh.challenge.pageObjects.user.UserProfilePage;
 import com.hellofresh.challenge.repositories.UserRepository;
 import com.hellofresh.challenge.userflows.BuyItemFlow;
+import com.hellofresh.challenge.userflows.CreateUserFlow;
 import com.hellofresh.challenge.userflows.LoginFlow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -42,13 +43,7 @@ public class WebTest {
         String expectedHeading = "MY ACCOUNT";
         String expectedWelcomeMessage = "Welcome to your account.";
 
-        UserProfilePage profilePage = loginPage.createUserWith(user.getEmail())
-                .selectGender(user.getGender())
-                .enterName(user.getFirstName(), user.getLastName())
-                .enterPassword(user.getPassword())
-                .selectBirthday(user.getBirthday())
-                .enterAddress(user.getAddress())
-                .confirmRegistration();
+        UserProfilePage profilePage = CreateUserFlow.createUserFrom(loginPage, user);
 
         assertThat(profilePage.getHeading()).isEqualTo(expectedHeading);
         assertThat(profilePage.getAccountName()).isEqualTo(user.getName());
