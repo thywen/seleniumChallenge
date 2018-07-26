@@ -74,7 +74,6 @@ public class WebTest {
 
     @Test
     public void checkoutTest() {
-        System.out.print(System.getenv("DRIVER"));
         User user = repository.getExistingUser();
         String itemToBuy = "Faded Short Sleeve T-shirts";
         String expectedHeading = "ORDER CONFIRMATION";
