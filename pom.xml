@@ -22,8 +22,6 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.22.0</version>
             <configuration>
-              <parallel>methods</parallel>
-              <threadCount>2</threadCount>
               <environmentVariables>
                 <DRIVER>CHROMEDRIVER</DRIVER>
               </environmentVariables>
@@ -41,8 +39,6 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.22.0</version>
             <configuration>
-              <parallel>methods</parallel>
-              <threadCount>2</threadCount>
               <environmentVariables>
                 <DRIVER>FIREFOXDRIVER</DRIVER>
               </environmentVariables>
@@ -50,6 +46,12 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+    <profile>
+      <id>api</id>
+      <properties>
+        <exclude.tests>com.hellofresh.challenge.uitest</exclude.tests>
+      </properties>
     </profile>
   </profiles>
 
@@ -124,6 +126,24 @@
             <DRIVER>CHROMEDRIVER</DRIVER>
           </environmentVariables>
         </configuration>
+        <executions>
+          <execution>
+            <id>api-test</id>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <includes>
+                <include>**/integrationTest/**</include>
+              </includes>
+              <excludes>
+                <exclude>
+                  **/test/**
+                </exclude>
+              </excludes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
