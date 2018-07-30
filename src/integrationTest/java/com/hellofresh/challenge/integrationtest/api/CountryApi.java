@@ -19,9 +19,9 @@ public class CountryApi extends BaseApi {
 
     public static Response postCountry(Country payload) {
         return given()
-            .contentType("application/json")
-            .body(payload)
-        .when()
-            .post(API_URL);
+                .contentType("application/json")
+                .body(payload)
+                .when()
+                .post(API_URL);
     }
 }

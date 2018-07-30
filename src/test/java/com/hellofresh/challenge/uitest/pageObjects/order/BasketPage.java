@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
-
 public class BasketPage extends PageWithTopMenu {
     public static String URL = "controller=order";
 
@@ -19,7 +17,7 @@ public class BasketPage extends PageWithTopMenu {
     }
 
     public DeliveryAddressPage continueToAddressPage() {
-        wait.until(visibilityOf(proceedToCheckoutButton)).click();
+        saveClick(proceedToCheckoutButton);
         return andReturn(DeliveryAddressPage.class);
     }
 }

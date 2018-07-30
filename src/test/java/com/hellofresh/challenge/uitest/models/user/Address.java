@@ -154,7 +154,7 @@ public class Address {
         }
 
         public Address build() {
-            return new Address(company,address1, address2, city, state, postcode, country, other, phone, mobilePhone, addressAlias);
+            return new Address(company, address1, address2, city, state, postcode, country, other, phone, mobilePhone, addressAlias);
         }
     }
 }

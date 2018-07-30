@@ -15,7 +15,7 @@ abstract class BasePage {
     BasePage(WebDriver driver, String url) {
         this.driver = driver;
         this.url = url;
-        this.wait =  new WebDriverWait(driver, 10, 50);
+        this.wait = new WebDriverWait(driver, 10, 50);
     }
 
     protected <T extends BasePage> T andReturn(Class<T> pageObject) {

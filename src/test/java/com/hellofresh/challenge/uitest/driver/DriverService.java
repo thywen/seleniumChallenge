@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 public class DriverService {
     private ChromeWebDriverFactory chromeWebDriverFactory;
     private FirefoxDriverFactory firefoxDriverFactory;
+
     private DriverService() {
         chromeWebDriverFactory = new ChromeWebDriverFactory();
         firefoxDriverFactory = new FirefoxDriverFactory();

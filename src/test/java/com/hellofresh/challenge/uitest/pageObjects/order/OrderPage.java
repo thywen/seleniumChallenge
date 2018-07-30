@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-abstract class OrderPage extends PageWithTopMenu{
+abstract class OrderPage extends PageWithTopMenu {
 
     @FindBy(xpath = "//li[@class='step_done step_done_last four']")
     private WebElement shippingTab;

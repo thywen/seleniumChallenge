@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 
-public class RegistrationPage extends PageWithTopMenu{
+public class RegistrationPage extends PageWithTopMenu {
 
     private static String URL = "my-account#account-creation";
 
@@ -94,7 +94,7 @@ public class RegistrationPage extends PageWithTopMenu{
 
     public RegistrationPage enterPassword(String password) {
         passwordTextField.sendKeys(password);
-            return this;
+        return this;
     }
 
     public RegistrationPage selectBirthday(DateTime birthday) {

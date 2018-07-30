@@ -11,7 +11,7 @@ class AddressRepository {
                 faker.address().streetAddress(),
                 faker.address().city(),
                 faker.address().state(),
-                faker.address().zipCode().substring(0,5),
+                faker.address().zipCode().substring(0, 5),
                 "United States",
                 faker.phoneNumber().cellPhone(),
                 faker.internet().domainSuffix())
