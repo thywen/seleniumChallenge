@@ -12,8 +12,8 @@ import java.util.Random;
 public class UserRepository {
 
     public User getExistingUser() {
-        String existingUserEmail = "hf_challenge_123456@hf12345.com";
-        String existingUserPassword = "12345678";
+        String existingUserEmail = "";
+        String existingUserPassword = "";
         String existingUserFirstname = "Joe";
         String existingUserLastname = "Black";
 
